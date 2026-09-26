@@ -1,0 +1,223 @@
+$bg-main: #ffffff;
+$cabinet-bg: rgb(94 104 128 / 0.88);
+$card-surface: #162036BF;
+
+$primary-glow: #6366f1;
+$cyan: #06b6d4;
+$yellow: #eab308;
+$green: #10b981;
+$pink: #ec4899;
+
+$text-light: #f8fafc;
+$font-body: 'Segoe UI', Roboto, Arial;
+
+$block-colors: (
+    'cyan': #22d3ee,
+    'blue': #60a5fa,
+    'orange': #fb923c,
+    'yellow': #fde047,
+    'green': #4ade80,
+    'purple': #c084fc,
+    'red': #f87171
+);
+
+@mixin flex($justify: flex-start, $align: stretch, $direction: row, $gap: 0) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    gap: $gap;
+}
+
+@mixin flex-center($direction: row, $gap: 0) {
+    @include flex(center, center, $direction, $gap);
+}
+
+@mixin flex-between($align: center, $gap: 0) {
+    @include flex(space-between, $align, row, $gap);
+}
+
+@mixin glass-panel($bg: $card-surface, $border-color: #191515) {
+    background: $bg;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid $border-color;
+    border-radius: 14px;
+}
+
+@mixin neon-box($border-color: rgba($primary-glow, 0.35)) {
+    border: 1px solid $border-color;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+}
+
+body {
+    font-family: $font-body;
+    background-color: $bg-main;
+    color: $text-light;
+    @include flex-center;
+    padding: 1.5rem 1rem;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    @include flex-center;
+}
+
+.main-container {
+    width: 100%;
+    background: $cabinet-bg;
+    border-radius: 22px;
+    overflow: hidden;
+    @include neon-box;
+    transition: all 0.3s ease;
+}
+
+.container-body {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1fr;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.side-panel {
+    @include flex(flex-start, stretch, column, 1rem);
+}
+
+.card {
+    @include glass-panel;
+    padding: 0.9rem 1.15rem;
+    transition: transform 0.2s ease;
+
+    .card-title {
+        @include flex-between(center);
+        margin-bottom: 0.35rem;
+    }
+
+    .value {
+        font-size: 1.65rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        line-height: 1.2;
+
+        &.val-score {
+            color: $cyan;
+        }
+
+        &.val-level {
+            color: $yellow;
+        }
+
+        &.val-lines {
+            color: $green;
+        }
+
+        &.val-high {
+            color: $pink;
+        }
+    }
+}
+
+.panel-center {
+    @include flex-center(column);
+}
+
+.container-grid {
+    background: #020617;
+    border-radius: 18px;
+    padding: 10px;
+    position: relative;
+    max-width: 260px;
+    width: 100%;
+
+    .tetris-grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(20, 19px);
+        gap: 1.5px;
+        background-color: #040812;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        padding: 3px;
+        position: relative;
+        overflow: hidden;
+    }
+}
+
+.cell {
+    background-color: rgba(255, 255, 255, 0.025);
+    border-radius: 2px;
+}
+
+@each $name, $color in $block-colors {
+    .block-#{$name} {
+        background-color: $color;
+    }
+}
+
+.preview-box {
+    background: #020617;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 18px);
+    grid-template-rows: repeat(4, 18px);
+    gap: 2px;
+    justify-content: center;
+    padding: 10px;
+    margin: 0.6rem auto 0;
+    width: max-content;
+}
+
+.btn-group {
+    @include flex(flex-start, stretch, column, 0.6rem);
+    margin-top: 0.5rem;
+}
+
+.custom-btn {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    @include flex-center(row, 0.5rem);
+    text-decoration: none;
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &.btn-start {
+        background-color: #10b981;
+        color: #ffffff;
+    }
+
+    &.btn-pause {
+        background-color: #f59e0b;
+        color: #ffffff;
+    }
+
+    &.btn-restart {
+        background-color: #0f89f1;
+        color: #ffffff;
+    }
+}
