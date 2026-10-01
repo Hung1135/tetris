@@ -45,7 +45,7 @@ function stopBlock(){
     shapeBlock.forEach((offset) => {
         cells[currentPos + offset].classList.add('marked')
     });
-
+    checkAndRemoveRows();
     currentPos = 4;
     const checkGameOver = shapeBlock.some(offset =>
         cells[currentPos + offset].classList.contains('marked')
@@ -61,6 +61,32 @@ function stopBlock(){
 
     drawBlock();
 }
+
+function checkAndRemoveRows(){
+    let countRow = 0;
+    for(let i = 19; i>=0; i--){
+        const rowStart = i * space2And3;
+        let isRowFull = true;
+        for (let j = 0; j < space2And3; j++){
+            if (!cells[rowStart + j].classList.contains('marked')) {
+                isRowFull = false;
+                break;
+            }
+        }
+
+        if(isRowFull){
+            countRow += 1;
+            for (let j = rowStart + space2And3 - 1; j >= space2And3; j--) {
+                cells[j].className = cells[j- space2And3].className;
+            }
+            for (let i = 0; i < space2And3; i++) {
+                cells[i].className = 'cell';
+            }
+            i++;
+        }
+    }
+}
+
 
 function navigate(e) {
     if(!isplay) return;
