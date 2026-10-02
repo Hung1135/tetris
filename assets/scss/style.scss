@@ -6,7 +6,6 @@ $primary-glow: #6366f1;
 $cyan: #06b6d4;
 $yellow: #eab308;
 $green: #10b981;
-$pink: #ec4899;
 
 $text-light: #f8fafc;
 $font-body: 'Segoe UI', Roboto, Arial;
@@ -128,7 +127,7 @@ body {
         }
 
         &.val-high {
-            color: $pink;
+            color: $cyan;
         }
     }
 }

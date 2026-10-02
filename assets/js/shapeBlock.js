@@ -41,7 +41,6 @@ const shapeL = {
     ]
 };
 
-// chữ J
 const shapeJ = {
     color: 'block-blue',
     shapes: [

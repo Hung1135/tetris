@@ -1,14 +1,16 @@
-const btnStart = document.querySelector('.btn-start');
 const allGrid = document.querySelector('.tetris-grid');
 const cells = Array.from(allGrid.querySelectorAll('.cell'));
 
 let currentPos = 4;
 let space2And3 = 10;
-let orientedBlock = 2;
+let orientedBlock = 0;
 
-let random = Math.floor(Math.random() * allBlocks.length);
-let currentBlock = allBlocks[random];
-let shapeBlock = currentBlock.shapes[orientedBlock];
+
+// let random = Math.floor(Math.random() * allBlocks.length);
+// let currentBlock = allBlocks[random];
+// let shapeBlock = currentBlock.shapes[orientedBlock];
+let currentBlock = null;
+let shapeBlock = null;
 
 
 // let shapeBlock = [0, 1, space2And3 ,space2And3+1];
@@ -20,6 +22,13 @@ function drawBlock() {
         // cells[currentPos+ offset].classList.add('block-yellow')
         cells[currentPos+ offset].classList.add(currentBlock.color)
     })
+}
+
+function redrawBlock() {
+    currentPos = 4;
+    orientedBlock = 0;
+    currentBlock = getNextBlock();
+    shapeBlock = currentBlock.shapes[orientedBlock];
 }
 
 function moveBlock(){
@@ -55,11 +64,13 @@ function stopBlock(){
         cells[currentPos + offset].classList.add('marked')
     });
     checkAndRemoveRows();
-    currentPos = 4;
-    orientedBlock = 0;
-    random = Math.floor(Math.random() * allBlocks.length);
-    currentBlock = allBlocks[random];
-    shapeBlock = currentBlock.shapes[orientedBlock];
+
+    // currentPos = 4;
+    // orientedBlock = 0;
+    // random = Math.floor(Math.random() * allBlocks.length);
+    // currentBlock = allBlocks[random];
+    // shapeBlock = currentBlock.shapes[orientedBlock];
+    redrawBlock();
 
     const checkGameOver = shapeBlock.some(offset =>
         cells[currentPos + offset].classList.contains('marked')
@@ -101,41 +112,22 @@ function checkAndRemoveRows(){
     }
 }
 
+function changeOriented(){
+    const nextOriented = (orientedBlock + 1) % currentBlock.shapes.length;
+    const nextShape = currentBlock.shapes[nextOriented];
+    const checkLeft = nextShape.some(offset => (currentPos + offset)% space2And3 ===0);
+    const checkRight = nextShape.some(offset => (currentPos + offset)% space2And3 ===space2And3-1);
 
-function navigate(e) {
-    if(!isplay) return;
-    if(e.key === 'A' || e.key === 'a'){
-        const checkLeft = shapeBlock.some(offset => (currentPos + offset)%space2And3 ===0);
-        const checkBlock = shapeBlock.some(offset => cells[currentPos + offset - 1]?.classList.contains('marked'));
-        if (!checkLeft && !checkBlock) {
-            removeBlock();
-            currentPos -= 1;
-            drawBlock();
-        }
-    } else if (e.key === 'D'|| e.key === 'd') {
-        const checkRight = shapeBlock.some(offset => (currentPos + offset) % space2And3 === space2And3 - 1);
-        const checkBlock = shapeBlock.some(offset => cells[currentPos + offset + 1]?.classList.contains('mared'));
-        if (!checkRight && !checkBlock) {
-            removeBlock();
-            currentPos += 1;
-            drawBlock();
-        }
-    }
-
-
-
-    }
-document.addEventListener('keydown', navigate);
-
-btnStart.addEventListener('click', ()=>{
-    if(isplay) return;
-    cells.forEach(cell => {
-        cell.className = 'cell';
+    const checkBlock = nextShape.some(offset => {
+        const nextPos = currentPos + offset;
+        return nextPos >= 200 || cells[nextPos]?.classList.contains('marked');
     });
 
-    isplay = true;
-    // currentPos -= 4;
-    drawBlock();
+    if (!checkBlock && !(checkLeft && checkRight)) {
+        removeBlock();
+        orientedBlock = nextOriented;
+        shapeBlock = nextShape;
+        drawBlock();
+    }
 
-    saveTime = setInterval(moveBlock, 100);
-});
+}
