@@ -4,13 +4,21 @@ const cells = Array.from(allGrid.querySelectorAll('.cell'));
 
 let currentPos = 4;
 let space2And3 = 10;
-let shapeBlock = [0, 1, space2And3 ,space2And3+1];
+let orientedBlock = 2;
+
+let random = Math.floor(Math.random() * allBlocks.length);
+let currentBlock = allBlocks[random];
+let shapeBlock = currentBlock.shapes[orientedBlock];
+
+
+// let shapeBlock = [0, 1, space2And3 ,space2And3+1];
 let saveTime = null;
 let isplay = false;
 
 function drawBlock() {
     shapeBlock.forEach((offset) => {
-        cells[currentPos+ offset].classList.add('block-yellow')
+        // cells[currentPos+ offset].classList.add('block-yellow')
+        cells[currentPos+ offset].classList.add(currentBlock.color)
     })
 }
 
@@ -27,7 +35,8 @@ function moveBlock(){
 
 function removeBlock(){
     shapeBlock.forEach((offset) => {
-        cells[currentPos + offset].classList.remove('block-yellow')
+        // cells[currentPos + offset].classList.remove('block-yellow')
+        cells[currentPos + offset].classList.remove(currentBlock.color)
     })
 }
 
@@ -47,6 +56,11 @@ function stopBlock(){
     });
     checkAndRemoveRows();
     currentPos = 4;
+    orientedBlock = 0;
+    random = Math.floor(Math.random() * allBlocks.length);
+    currentBlock = allBlocks[random];
+    shapeBlock = currentBlock.shapes[orientedBlock];
+
     const checkGameOver = shapeBlock.some(offset =>
         cells[currentPos + offset].classList.contains('marked')
     );
