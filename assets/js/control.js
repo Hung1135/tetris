@@ -5,9 +5,15 @@ const valLevel = document.querySelector('.val-level');
 
 function navigate(e) {
     if(!isplay) return;
+
     if(e.key === 'A' || e.key === 'a'){
         const checkLeft = shapeBlock.some(offset => (currentPos + offset)%space2And3 ===0);
-        const checkBlock = shapeBlock.some(offset => cells[currentPos + offset - 1]?.classList.contains('marked'));
+        const checkBlock = shapeBlock.some(offset => {
+            let target = currentPos + offset - 1;
+            return target >= 0 && cells[target].classList.contains('marked');
+        });
+
+
         if (!checkLeft && !checkBlock) {
             removeBlock();
             currentPos -= 1;
@@ -16,12 +22,18 @@ function navigate(e) {
 
     } else if (e.key === 'D'|| e.key === 'd') {
         const checkRight = shapeBlock.some(offset => (currentPos + offset) % space2And3 === space2And3 - 1);
-        const checkBlock = shapeBlock.some(offset => cells[currentPos + offset + 1]?.classList.contains('marked'));
+        const checkBlock = shapeBlock.some(offset => {
+            let target = currentPos + offset + 1;
+            return target < 200 && cells[target].classList.contains('marked');
+        });
+
+
         if (!checkRight && !checkBlock) {
             removeBlock();
             currentPos += 1;
             drawBlock();
         }
+
 
     }else if( e.key === 'W'|| e.key === 'w' ) {
         changeOriented();

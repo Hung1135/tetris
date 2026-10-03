@@ -39,6 +39,11 @@ function moveBlock(){
 
     removeBlock();
     currentPos +=space2And3;
+
+    if (isLevel2()) {
+        autoRotate();
+    }
+
     drawBlock();
 }
 
@@ -120,7 +125,7 @@ function changeOriented(){
 
     const checkBlock = nextShape.some(offset => {
         const nextPos = currentPos + offset;
-        return nextPos >= 200 || cells[nextPos]?.classList.contains('marked');
+        return nextPos < 0 || nextPos >= 200 || cells[nextPos].classList.contains('marked');
     });
 
     if (!checkBlock && !(checkLeft && checkRight)) {
