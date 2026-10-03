@@ -1,4 +1,7 @@
 const btnStart = document.querySelector('.btn-start');
+const btnLevel = document.querySelector('.btn-level');
+const popupLevel = document.querySelector('.popup-level');
+const valLevel = document.querySelector('.val-level');
 
 function navigate(e) {
     if(!isplay) return;
@@ -41,4 +44,14 @@ btnStart.addEventListener('click', ()=>{
     drawBlock();
 
     saveTime = setInterval(moveBlock, 100);
+});
+
+btnLevel.addEventListener('click', () => {
+    popupLevel.classList.toggle('show');
+});
+document.querySelectorAll('.level-item').forEach(e => {
+    e.addEventListener('click', () => {
+        valLevel.textContent = e.textContent;
+        popupLevel.classList.remove('show');
+    });
 });

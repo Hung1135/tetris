@@ -1,8 +1,7 @@
-$bg-main: #ffffff;
-$cabinet-bg: rgb(94 104 128 / 0.88);
+$bg-main:  rgb(196 204 204 / 0.7);
+$cabinet-bg: rgb(196 204 204 / 0.7);
 $card-surface: #162036BF;
 
-$primary-glow: #6366f1;
 $cyan: #06b6d4;
 $yellow: #eab308;
 $green: #10b981;
@@ -44,10 +43,6 @@ $block-colors: (
     border-radius: 14px;
 }
 
-@mixin neon-box($border-color: rgba($primary-glow, 0.35)) {
-    border: 1px solid $border-color;
-}
-
 *,
 *::before,
 *::after {
@@ -82,7 +77,6 @@ body {
     background: $cabinet-bg;
     border-radius: 22px;
     overflow: hidden;
-    @include neon-box;
     transition: all 0.3s ease;
 }
 

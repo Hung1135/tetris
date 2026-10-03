@@ -1,0 +1,29 @@
+.popup-level {
+  display: none;
+  position: fixed;
+  right: 13%;
+  padding: 5px;
+  background: white;
+  border-radius: 12px;
+}
+.popup-level.show {
+  display: flex;
+  flex-direction: column;
+}
+.popup-level .level-item {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  font-size: medium;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.popup-level .level-item:hover {
+  background: rgba(196, 204, 204, 0.7);
+  color: #000000;
+}
+
+/*# sourceMappingURL=popup.css.map */
