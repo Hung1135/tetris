@@ -12,8 +12,6 @@ function navigate(e) {
             let target = currentPos + offset - 1;
             return target >= 0 && cells[target].classList.contains('marked');
         });
-
-
         if (!checkLeft && !checkBlock) {
             removeBlock();
             currentPos -= 1;
@@ -26,8 +24,6 @@ function navigate(e) {
             let target = currentPos + offset + 1;
             return target < 200 && cells[target].classList.contains('marked');
         });
-
-
         if (!checkRight && !checkBlock) {
             removeBlock();
             currentPos += 1;

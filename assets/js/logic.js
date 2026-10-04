@@ -29,6 +29,10 @@ function redrawBlock() {
     orientedBlock = 0;
     currentBlock = getNextBlock();
     shapeBlock = currentBlock.shapes[orientedBlock];
+
+    if (isLevel3()) {
+        combine2Block();
+    }
 }
 
 function moveBlock(){
