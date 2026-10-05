@@ -4,7 +4,7 @@ const popupLevel = document.querySelector('.popup-level');
 const valLevel = document.querySelector('.val-level');
 
 function navigate(e) {
-    if(!isplay) return;
+    if (!isplay|| isBlockFall) return;
 
     if(e.key === 'A' || e.key === 'a'){
         const checkLeft = shapeBlock.some(offset => (currentPos + offset)%space2And3 ===0);
@@ -51,7 +51,7 @@ btnStart.addEventListener('click', ()=>{
     redrawBlock();
     drawBlock();
 
-    saveTime = setInterval(moveBlock, 100);
+    saveTime = setInterval(moveBlock, 1000);
 });
 
 btnLevel.addEventListener('click', () => {

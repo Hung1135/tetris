@@ -42,6 +42,11 @@ function moveBlock(){
     }
 
     removeBlock();
+    if (isLevel4()) {
+        dropLevel4();
+        return;
+    }
+
     currentPos +=space2And3;
 
     if (isLevel2()) {
