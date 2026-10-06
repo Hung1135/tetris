@@ -57,6 +57,11 @@ function moveBlock(){
 }
 
 function removeBlock(){
+    if (isLevel5()) {
+        removeBlockLv5();
+        return;
+    }
+
     shapeBlock.forEach((offset) => {
         // cells[currentPos + offset].classList.remove('block-yellow')
         cells[currentPos + offset].classList.remove(currentBlock.color)
@@ -64,6 +69,9 @@ function removeBlock(){
 }
 
 function checkBlockStop(){
+    if (isLevel5()) {
+        return checkBlockStopLv5();
+    }
 
     return shapeBlock.some((offset) => {
         const nextPos = currentPos + space2And3 + offset;

@@ -33,6 +33,11 @@ function navigate(e) {
 
     }else if( e.key === 'W'|| e.key === 'w' ) {
         changeOriented();
+    }else if (e.key === 'S' || e.key === 's') {
+        moveBlock();
+
+        clearInterval(saveTime);
+        saveTime = setInterval(moveBlock, 1000);
     }
 
 
