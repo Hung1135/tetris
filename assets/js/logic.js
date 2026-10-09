@@ -1,5 +1,7 @@
 const allGrid = document.querySelector('.tetris-grid');
-const cells = Array.from(allGrid.querySelectorAll('.cell'));
+let cells = [];
+row =20;
+col =10;
 
 let currentPos = 4;
 let space2And3 = 10;
@@ -11,11 +13,27 @@ let orientedBlock = 0;
 // let shapeBlock = currentBlock.shapes[orientedBlock];
 let currentBlock = null;
 let shapeBlock = null;
-
-
-// let shapeBlock = [0, 1, space2And3 ,space2And3+1];
 let saveTime = null;
 let isplay = false;
+
+
+function init(){
+    for (let i = 0; i <row; i++) {
+        for (let j = 0; j < col; j++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            allGrid.appendChild(cell);
+            cells.push(cell);
+        }
+    }
+}
+
+init();
+
+function getNextBlock(){
+    const randomIndex = Math.floor(Math.random() * allBlocks.length);
+    return allBlocks[randomIndex];
+}
 
 function drawBlock() {
     shapeBlock.forEach((offset) => {

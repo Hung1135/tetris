@@ -2,10 +2,7 @@ $bg-main:  rgb(196 204 204 / 0.7);
 $cabinet-bg: rgb(196 204 204 / 0.7);
 $card-surface: #162036BF;
 
-$cyan: #06b6d4;
-$yellow: #eab308;
 $green: #10b981;
-
 $text-light: #f8fafc;
 $font-body: 'Segoe UI', Roboto, Arial;
 
@@ -37,24 +34,18 @@ $block-colors: (
 
 @mixin glass-panel($bg: $card-surface, $border-color: #191515) {
     background: $bg;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid $border-color;
     border-radius: 14px;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 html,
 body {
-    width: 100%;
     min-height: 100vh;
+}
+
+body {
+    font-family: $font-body;
+    @include flex-center;
 }
 
 body {
@@ -66,9 +57,7 @@ body {
 }
 
 .game-container {
-    width: 100%;
-    max-width: 980px;
-    margin: 0 auto;
+    max-width: 700px;
     @include flex-center;
 }
 
@@ -76,54 +65,31 @@ body {
     width: 100%;
     background: $cabinet-bg;
     border-radius: 22px;
-    overflow: hidden;
-    transition: all 0.3s ease;
 }
 
 .container-body {
     padding: 1.5rem;
     display: grid;
-    grid-template-columns: 1fr 1.3fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     align-items: center;
 }
 
-.side-panel {
-    @include flex(flex-start, stretch, column, 1rem);
-}
 
 .card {
     @include glass-panel;
     padding: 0.9rem 1.15rem;
     transition: transform 0.2s ease;
-
-    .card-title {
-        @include flex-between(center);
-        margin-bottom: 0.35rem;
-    }
-
+    margin: 30px;
     .value {
         font-size: 1.65rem;
         font-weight: 800;
         letter-spacing: 2px;
-        line-height: 1.2;
 
-        &.val-score {
-            color: $cyan;
-        }
-
-        &.val-level {
-            color: $yellow;
-        }
-
-        &.val-lines {
-            color: $green;
-        }
-
-        &.val-high {
-            color: $cyan;
-        }
     }
+}
+.side-panel{
+    width: 300px;
 }
 
 .panel-center {
@@ -148,7 +114,6 @@ body {
         border-radius: 8px;
         padding: 3px;
         position: relative;
-        overflow: hidden;
     }
 }
 
@@ -163,20 +128,6 @@ body {
     }
 }
 
-.preview-box {
-    background: #020617;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: repeat(4, 18px);
-    grid-template-rows: repeat(4, 18px);
-    gap: 2px;
-    justify-content: center;
-    padding: 10px;
-    margin: 0.6rem auto 0;
-    width: max-content;
-}
-
 .btn-group {
     @include flex(flex-start, stretch, column, 0.6rem);
     margin-top: 0.5rem;
@@ -185,13 +136,10 @@ body {
 .custom-btn {
     font-size: 0.82rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
     padding: 0.7rem 1rem;
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
     @include flex-center(row, 0.5rem);
     text-decoration: none;
 
@@ -204,10 +152,6 @@ body {
         color: #ffffff;
     }
 
-    &.btn-pause {
-        background-color: #f59e0b;
-        color: #ffffff;
-    }
 
     &.btn-restart {
         background-color: #0f89f1;

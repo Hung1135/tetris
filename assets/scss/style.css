@@ -1,15 +1,15 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html,
 body {
-  width: 100%;
   min-height: 100vh;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0;
 }
 
 body {
@@ -25,9 +25,7 @@ body {
 }
 
 .game-container {
-  width: 100%;
-  max-width: 980px;
-  margin: 0 auto;
+  max-width: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,60 +37,32 @@ body {
   width: 100%;
   background: rgba(196, 204, 204, 0.7);
   border-radius: 22px;
-  overflow: hidden;
-  transition: all 0.3s ease;
 }
 
 .container-body {
   padding: 1.5rem;
   display: grid;
-  grid-template-columns: 1fr 1.3fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   align-items: center;
 }
 
-.side-panel {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .card {
   background: rgba(22, 32, 54, 0.7490196078);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid #191515;
   border-radius: 14px;
   padding: 0.9rem 1.15rem;
   transition: transform 0.2s ease;
-}
-.card .card-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  gap: 0;
-  margin-bottom: 0.35rem;
+  margin: 30px;
 }
 .card .value {
   font-size: 1.65rem;
   font-weight: 800;
   letter-spacing: 2px;
-  line-height: 1.2;
 }
-.card .value.val-score {
-  color: #06b6d4;
-}
-.card .value.val-level {
-  color: #eab308;
-}
-.card .value.val-lines {
-  color: #10b981;
-}
-.card .value.val-high {
-  color: #06b6d4;
+
+.side-panel {
+  width: 300px;
 }
 
 .panel-center {
@@ -121,7 +91,6 @@ body {
   border-radius: 8px;
   padding: 3px;
   position: relative;
-  overflow: hidden;
 }
 
 .cell {
@@ -157,20 +126,6 @@ body {
   background-color: #f87171;
 }
 
-.preview-box {
-  background: #020617;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  display: grid;
-  grid-template-columns: repeat(4, 18px);
-  grid-template-rows: repeat(4, 18px);
-  gap: 2px;
-  justify-content: center;
-  padding: 10px;
-  margin: 0.6rem auto 0;
-  width: max-content;
-}
-
 .btn-group {
   display: flex;
   justify-content: flex-start;
@@ -183,13 +138,10 @@ body {
 .custom-btn {
   font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   padding: 0.7rem 1rem;
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -202,10 +154,6 @@ body {
 }
 .custom-btn.btn-start {
   background-color: #10b981;
-  color: #ffffff;
-}
-.custom-btn.btn-pause {
-  background-color: #f59e0b;
   color: #ffffff;
 }
 .custom-btn.btn-restart {
