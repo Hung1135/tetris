@@ -2,6 +2,7 @@ const btnStart = document.querySelector('.btn-start');
 const btnLevel = document.querySelector('.btn-level');
 const popupLevel = document.querySelector('.popup-level');
 const valLevel = document.querySelector('.val-level');
+let speed = 200
 
 function navigate(e) {
     if (!isplay|| isBlockFall) return;
@@ -37,7 +38,7 @@ function navigate(e) {
         moveBlock();
 
         clearInterval(saveTime);
-        saveTime = setInterval(moveBlock, 1000);
+        saveTime = setInterval(moveBlock, speed);
     }
 
 
@@ -56,7 +57,7 @@ btnStart.addEventListener('click', ()=>{
     redrawBlock();
     drawBlock();
 
-    saveTime = setInterval(moveBlock, 1000);
+    saveTime = setInterval(moveBlock, speed);
 });
 
 btnLevel.addEventListener('click', () => {

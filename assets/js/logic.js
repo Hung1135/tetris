@@ -51,9 +51,17 @@ function redrawBlock() {
     if (isLevel3()) {
         combine2Block();
     }
+    if ( isLevel6()) {
+        initLv6();
+    }
 }
 
 function moveBlock(){
+
+    if (isLevel6()) {
+        moveLv6();
+        return;
+    }
     if(checkBlockStop()){
         stopBlock();
         return;
